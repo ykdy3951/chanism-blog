@@ -6,7 +6,9 @@ use super::section_heading::SectionHeading;
 pub fn About() -> impl IntoView {
     view! {
         <section class="mb-28 max-w-[45rem] text-center leading-8 sm:mb-40 animate-text-animation-fast scroll-mt-28" id="intro">
-            <SectionHeading children="About Me" />
+            <SectionHeading>
+                "About Me"
+            </SectionHeading>
             <p class="mb-3">
                 <span class="font-medium">
                     "I'm Chan-woong Kim, an software engineer with a passion for in-depth exploration in my field."

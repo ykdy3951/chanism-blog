@@ -3,10 +3,10 @@ use leptos_router::{use_navigate, NavigateOptions};
 
 #[component]
 pub fn Link(
-    #[prop(optional)] 
-    children: Option<impl IntoView>,
+    children: Children,
     href: String,
     class: Option<String>,
+    style: Signal<bool>,
 ) -> impl IntoView {
     let navigate = use_navigate();
     let href_clone = href.clone();
@@ -17,8 +17,18 @@ pub fn Link(
         )};
 
     view! {
-        <a href={href} on:click=on_click class={class.unwrap_or_default()}>
-            {children}
+        <a href={href} on:click=on_click class={class.unwrap_or_default()}
+            style=move || {
+                if style.get() {
+                    "--tw-text-opacity: 1; color: rgb(3 7 18 / var(--tw-text-opacity))".to_string()
+                } else {
+                    "".to_string()
+                }
+            }
+        >
+            {
+                children()
+            }
         </a>
     }
 }

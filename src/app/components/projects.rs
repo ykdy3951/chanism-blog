@@ -48,11 +48,11 @@ pub fn Projects() -> impl IntoView {
 
     let projects: Vec<ProjectData> = serde_json::from_str(projects_data).unwrap();
 
-    // Projects to children
-
     view! {
         <section id="projects" class="scroll-mt-28">
-            <SectionHeading children="My Projects" />
+            <SectionHeading>
+                "My Projects"
+            </SectionHeading>
             <div>
                 {
                     // Fragment
