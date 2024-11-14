@@ -44,7 +44,7 @@ pub fn Header() -> impl IntoView {
         },
         hashmap! {
             "name" => "About",
-            "hash" => "#intro",
+            "hash" => "#about",
         },
         hashmap! {
             "name" => "Projects",

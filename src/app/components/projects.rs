@@ -58,7 +58,7 @@ pub fn Projects() -> impl IntoView {
     });
 
     view! {
-        <section id="projects" class="scroll-mt-28">
+        <section id="projects" class="scroll-mt-28 mb-28">
             <SectionHeading>
                 "My Projects"
             </SectionHeading>
