@@ -1,7 +1,7 @@
 use leptos::*;
 use wasm_bindgen::{prelude::Closure, JsCast};
 use web_sys::window;
-use super::projects::ProjectData;
+use crate::app::components::projects::ProjectData;
 
 #[component]
 pub fn Project(

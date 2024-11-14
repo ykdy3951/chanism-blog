@@ -4,12 +4,18 @@ use leptos_meta::*;
 use leptos_router::*;
 
 pub mod components;
+pub mod context;
+pub mod api;
+pub mod hooks;
+
 use components::header::Header;
 use components::intro::Intro;
 use components::section_divisor::SectionDivisor;
 use components::about::About;
 use components::projects::Projects;
 use components::test::ScrollingComponent;
+
+use context::active_section_context::ActiveSectionContextProvider;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -76,13 +82,15 @@ fn AboutPage() -> impl IntoView {
         <main class="text-gray-950 relative pt-28 sm:pt-36 h-[5000px]" style="scroll-behavior: smooth;">
             <div class="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem]" />
             <div class="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem]"/>
-            <Header/>
-            <div class="flex flex-col items-center px-4">
-                <Intro/>
-                <SectionDivisor/>
-                <About/>
-                <Projects/>
-            </div>
+            <ActiveSectionContextProvider>            
+                <Header/>
+                <div class="flex flex-col items-center px-4">
+                    <Intro/>
+                    <SectionDivisor/>
+                    <About/>
+                    <Projects/>
+                </div>
+            </ActiveSectionContextProvider>
         </main>
     }
 }

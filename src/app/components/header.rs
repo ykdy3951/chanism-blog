@@ -1,7 +1,8 @@
 use leptos::*;
 use std::collections::HashMap;
 
-use super::link::Link;
+use crate::app::context::active_section_context::{SectionState, section_name_to_string, SectionName};
+use crate::app::components::link::Link;
 
 macro_rules! hashmap {
     ( $( $key:expr => $value:expr ),* $(,)? ) => {
@@ -18,7 +19,23 @@ macro_rules! hashmap {
 #[component]
 pub fn Header() -> impl IntoView {
 
-    let (_active_section, _set_active_section) = create_signal("Home".to_string());
+    let state = use_context::<RwSignal<SectionState>>().expect("ActiveSectionContextProvider not found");
+    // let (_active_section, _set_active_section) = create_signal("Home".to_string());
+    let (_active_section, _set_active_section) = create_slice(
+        state,
+        |state: &SectionState| section_name_to_string(state.active_section.clone()),
+        |state: &mut SectionState, active_section: String| {
+            state.active_section = match active_section.as_str() {
+                "Home" => SectionName::Home,
+                "About" => SectionName::About,
+                "Projects" => SectionName::Projects,
+                "Skills" => SectionName::Skills,
+                "Experience" => SectionName::Experience,
+                "Contact" => SectionName::Contact,
+                _ => SectionName::Home,
+            };
+        }
+    );
 
     let data = vec![
         hashmap! {
@@ -48,7 +65,8 @@ pub fn Header() -> impl IntoView {
     ];
 
     let on_click = move |item_name: String| {
-        _set_active_section.update(|active_section| *active_section = item_name.to_string());
+        // _set_active_section.update(|active_section| *active_section = item_name.to_string());
+        _set_active_section(item_name.to_string());
     };
     
     view! {
@@ -86,7 +104,7 @@ pub fn Header() -> impl IntoView {
                                             {
                                                 move || (
                                                     if is_active() {
-                                                        view! {<span class="bg-gray-100 rounded-full absolute inset-0 -z-10"></span>}
+                                                        view! {<span class="bg-gray-100 rounded-full absolute inset-0 -z-10 transition animate-slide-horizontal"></span>}
                                                     } else {
                                                         view! {<span class="bg-transparent rounded-full absolute inset-0 -z-10"></span>}
                                                     }

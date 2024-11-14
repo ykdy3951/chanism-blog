@@ -2,9 +2,21 @@ use leptos::*;
 use web_sys::console;
 use leptos_icons::*;
 use icondata as i;
+use crate::app::hooks::use_section_in_view::use_section_in_view;
+use crate::app::context::active_section_context::{SectionState, SectionName};
 
 #[component]
 pub fn Intro() -> impl IntoView {
+
+    let is_visible = use_section_in_view("home", 0.75, 1000.0);
+
+    create_effect(move |_| {
+        if is_visible.get() {
+            let state = use_context::<RwSignal<SectionState>>().expect("ActiveSectionContextProvider not found");
+            state.update(|state| state.active_section = SectionName::Home);
+        }
+    });
+
     view! {
         <section class="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]" id="home">
             <div class="flex items-center justify-center">
