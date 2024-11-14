@@ -14,6 +14,7 @@ use components::section_divisor::SectionDivisor;
 use components::about::About;
 use components::projects::Projects;
 use components::test::ScrollingComponent;
+use components::skills::Skills;
 
 use context::active_section_context::ActiveSectionContextProvider;
 
@@ -23,8 +24,6 @@ pub fn App() -> impl IntoView {
     provide_meta_context();
 
     view! {
-
-
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/chanism-blog.css"/>
@@ -89,6 +88,7 @@ fn AboutPage() -> impl IntoView {
                     <SectionDivisor/>
                     <About/>
                     <Projects/>
+                    <Skills />
                 </div>
             </ActiveSectionContextProvider>
         </main>

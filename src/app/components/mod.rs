@@ -7,3 +7,4 @@ pub mod section_heading;
 pub mod projects;
 pub mod test;
 pub mod project;
+pub mod skills;
