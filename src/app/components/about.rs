@@ -1,8 +1,7 @@
 use leptos::*;
 use crate::app::components::section_heading::SectionHeading;
-use crate::app::hooks::use_section_in_view::use_section_in_view;
+use crate::app::lib::hooks::use_section_in_view;
 use crate::app::context::active_section_context::{SectionState, SectionName};
-
 
 #[component]
 pub fn About() -> impl IntoView {
@@ -16,7 +15,6 @@ pub fn About() -> impl IntoView {
         }
     });
 
-
     view! {
         <section class="mb-28 max-w-[45rem] text-center leading-8 sm:mb-40 animate-text-animation-fast scroll-mt-28" id="about">
             <SectionHeading>
@@ -29,7 +27,7 @@ pub fn About() -> impl IntoView {
             </p>
             <p class="mb-3">
                 <span class="font-medium">                
-                    "Throughout my journey, I have participated in four competitions, including the KRX National University Student Securities and Derivatives Competition, where I received an encouragement award, showcasing my technical skills and dedication. Currently, I am participating in the Seoul Data Fellowship, where I continue to deepen my expertise in data and software solutions. My focus lies in AI and software development, where I continuously push the boundaries through challenging projects. Using deep learning frameworks like Torch, I work with multiple data modules, experimenting with various augmentation techniques to optimize performance."
+                    "Throughout my journey, I have participated in four competitions, including the KRX National University Student Securities and Derivatives Competition, where I received an encouragement award, showcasing my technical skills and dedication. Currently, I am participating in the Seoul Data Fellowship, where I continue to deepen my expertise in data and software solutions. My focus lies in AI and software development, where I continuously push the boundaries through challenging projects. Using deep learning frameworks like PyTorch, I work with multiple data modules, experimenting with various augmentation techniques to optimize performance."
                 </span>
             </p> 
             <p class="mb-3">

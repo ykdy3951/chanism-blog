@@ -6,7 +6,7 @@ use leptos_router::*;
 pub mod components;
 pub mod context;
 pub mod api;
-pub mod hooks;
+pub mod lib;
 
 use components::header::Header;
 use components::intro::Intro;

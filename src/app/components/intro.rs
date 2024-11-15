@@ -2,7 +2,7 @@ use leptos::*;
 use web_sys::console;
 use leptos_icons::*;
 use icondata as i;
-use crate::app::hooks::use_section_in_view::use_section_in_view;
+use crate::app::lib::hooks::use_section_in_view;
 use crate::app::context::active_section_context::{SectionState, SectionName};
 
 #[component]
