@@ -15,6 +15,7 @@ use components::about::About;
 use components::projects::Projects;
 use components::test::ScrollingComponent;
 use components::skills::Skills;
+use components::experience::Experience;
 
 use context::active_section_context::ActiveSectionContextProvider;
 
@@ -89,6 +90,7 @@ fn AboutPage() -> impl IntoView {
                     <About/>
                     <Projects/>
                     <Skills />
+                    <Experience />
                 </div>
             </ActiveSectionContextProvider>
         </main>

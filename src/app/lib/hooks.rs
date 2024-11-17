@@ -6,7 +6,6 @@ use web_sys::{IntersectionObserver, IntersectionObserverEntry, IntersectionObser
 use std::cell::Cell;
 use std::rc::Rc;
 
-// IntersectionObserver 로직을 캡슐화한 함수
 pub fn use_section_in_view(
     element_id: &str,
     threshold: f64,
@@ -45,7 +44,7 @@ pub fn use_section_in_view(
             let observer = IntersectionObserver::new_with_options(
                 callback.as_ref().unchecked_ref(),
                 &options,
-            ).expect("Observer 생성 실패");
+            ).expect("Failed to create IntersectionObserver");
 
             observer.observe(&element);
 

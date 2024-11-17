@@ -8,3 +8,6 @@ pub mod projects;
 pub mod test;
 pub mod project;
 pub mod skills;
+pub mod experience;
+pub mod vertical_timeline;
+pub mod vertical_timeline_element;

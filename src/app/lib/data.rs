@@ -1,3 +1,5 @@
+use icondata as i;
+
 pub static PROJECTS_DATA: &str = r#"
     [
         {
@@ -51,4 +53,36 @@ pub static SKILLS_DATA: &[&str] = &[
     "Kubernetes",
     "AWS",
     "GCP"
+];
+
+pub struct ExperienceData<'a> {
+    pub title: &'a str,
+    pub location: &'a str,
+    pub description: &'a str,
+    pub icon: i::Icon,
+    pub date: &'a str,
+}
+
+pub static EXPERIENCES_DATA : &[ExperienceData; 3] = &[
+    ExperienceData {
+        title: "Student",
+        location: "Hanyang University, Seoul, South Korea",
+        description: "Bachelor of Computer Science",
+        icon: i::BsBook,
+        date: "2019 - 2025",
+    },
+    ExperienceData {
+        title: "LLM Engineer",
+        location: "Seoul, Korea",
+        description: "Development of an LLM for Malware Detection and Annotation",
+        icon: i::BsGear,
+        date: "2024",
+    },
+    ExperienceData {
+        title: "Software Engineer",
+        location: "ZER01NE Incubation at Hyundai Motor Company", 
+        description: "Development of AI-based safety sensors for collaborative robots in smart factories",
+        icon: i::BsSuitcaseLg,
+        date: "2024",
+    }
 ];
