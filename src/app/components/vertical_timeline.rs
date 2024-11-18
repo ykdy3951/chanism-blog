@@ -30,6 +30,10 @@ pub fn VerticalTimeline(
     };
     
     create_effect(move |_| {
+        if line_color.is_empty() {
+            return;
+        }
+
         let document = web_sys::window().unwrap().document().unwrap();
         if let Some(html_element) = document.document_element() {
             html_element.set_attribute("style", &format!("--line-color: {}", line_color)).unwrap();

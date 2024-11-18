@@ -13,3 +13,5 @@ pub mod vertical_timeline;
 pub mod vertical_timeline_element;
 pub mod contact;
 pub mod submit_btn;
+pub mod footer;
+pub mod theme_switch;

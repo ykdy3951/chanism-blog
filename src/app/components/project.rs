@@ -41,14 +41,14 @@ pub fn Project(
     view! {
         <div style={style.clone()} class="group mb-3 sm:mb-8 last:mb-0" id={project_data.title.clone()}>
             <section class="bg-gray-100 max-w-[42rem] border border-black/5 overflow-hidden sm:pr-8 relative sm:h-[20rem] sm:w-[42rem]
-                even:pl-8 hover:bg-gray-200 transition group-even:pl-8 rounded-lg">
+                even:pl-8 hover:bg-gray-200 transition group-even:pl-8 rounded-lg dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
                 <div class="pt-4 pb-8 px-5 sm:pl-10 sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full group-even:ml-[18rem]">
                     <h3 class="text-2xl font-semibold">{project_data.title.clone()}</h3>
-                    <p class="mt-2 leading-relaxed text-gray-700">{project_data.description}</p>
+                    <p class="mt-2 leading-relaxed text-gray-700 dark:text-white/70">{project_data.description}</p>
                     <ul class="flex flex-wrap mt-4 gap-2 sm:mt-auto">
                     {
                         project_data.tags.into_iter().enumerate().map(|(idx, tag)| view! {
-                            <li class="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full" key={idx}>{tag}</li>
+                            <li class="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70" key={idx}>{tag}</li>
                         })
                             .collect::<Vec<_>>()
                     }

@@ -116,7 +116,7 @@ pub fn Skills() -> impl IntoView {
                     .into_iter().enumerate().map(|(idx, skill)| 
                     {
                         view! {
-                            <li class=move || format!("bg-white borderBlack rounded-xl px-5 py-3 shadow-md {:}", 
+                            <li class=move || format!("bg-white borderBlack rounded-xl px-5 py-3 shadow-md dark:bg-white/10 dark:text-white/80 {:}", 
                                 if style_name.get() == "skill-item" { "skill-item".to_string() } else { format!("fade-in-delay-{}", idx) }
                             ) key={idx}>
                                 {*skill}

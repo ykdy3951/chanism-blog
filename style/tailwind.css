@@ -5,7 +5,14 @@
 html {
     scroll-behavior: smooth;
     --tw-bg-opacity: 1;
-    background-color: rgb(249 250 251 / var(--tw-bg-opacity))
+    background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+    --line-color: #e5e7eb
+}
+
+html.dark {
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+    --line-color: rgba(255, 255, 255, 0.2)
 }
 
 .vertical-timeline * {

@@ -24,7 +24,7 @@ once_cell = "1.10.0"
 icondata = "0.4.0"
 leptos_icons = "0.3.1"
 # web-sys = "0.3.55"
-web-sys = { version = "0.3.72", features = ["DomRect", "DomRectList", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit", "Document", "HtmlElement"] }
+web-sys = { version = "0.3.72", features = ["DomRect", "DomRectList", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit", "Document", "HtmlElement", "Window", "Storage", "MediaQueryList"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 dotenv = "0.15.0"

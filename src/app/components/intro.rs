@@ -49,18 +49,18 @@ pub fn Intro() -> impl IntoView {
                     <span>"Contact Me "</span>
                     <Icon icon=i::BsArrowRight class="opacity-70 group-hover:translate-x-1 transition" />
                 </a>
-                <a class="bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer border-black/10"
+                <a class="bg-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 active:scale-105 transition cursor-pointer border-black/10 dark:bg-white/10"
                     href="./chanism_cv.pdf" download=true
                 >
                     <span>"Download CV"</span>
                     <Icon icon=i::BsDownload class="opacity-60 group-hover:translate-y-1 transition" />
                 </a>
-                <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10"
+                <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10 dark:bg-white/10 dark:text-white/60"
                     href="https://www.linkedin.com/in/chanwoong-kim-1632b6283/" target="_blank"
                 >
                     <Icon icon=i::BsLinkedin class="text-[#0077b5] text-2xl" />
                 </a>
-                <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10"
+                <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10 dark:bg-white/10 dark:text-white/60"
                     href="https://www.github.com/ykdy3951" target="_blank"
                 >
                     <Icon icon=i::FaSquareGithubBrands class="text-[#333] text-3xl" />

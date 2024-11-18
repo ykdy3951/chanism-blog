@@ -77,7 +77,7 @@ pub fn Contact() -> impl IntoView {
                 "Contact Me"
             </SectionHeading>
             <p
-                class="text-gray-700"
+                class="text-gray-700 dark:text-white/80"
             >
                 "Please contact me direct at "
                 <a href="mailto:chanism99@gmail.com" class="text-blue-500 underline">
@@ -86,7 +86,7 @@ pub fn Contact() -> impl IntoView {
                 " or use the form below."
             </p>
             <form 
-                class="mt-10 flex flex-col"
+                class="mt-10 flex flex-col dark:text-black"
                 on:submit=move |event| {
                     event.prevent_default();
                     let form_data = FormData::new_with_form(event.target().unwrap().unchecked_ref()).unwrap();
@@ -96,7 +96,7 @@ pub fn Contact() -> impl IntoView {
                 <input 
                     type="email" 
                     name="email"
-                    class="h-14 rounded-lg border border-black/10 p-4" 
+                    class="h-14 rounded-lg border border-black/10 p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
                     placeholder="Your email" 
                     required
                     maxlength=100
@@ -104,7 +104,7 @@ pub fn Contact() -> impl IntoView {
                 <textarea 
                     placeholder="Your message" 
                     name="message"
-                    class="h-52 my-3 rounded-lg border border-black/10 p-4"
+                    class="h-52 my-3 rounded-lg border border-black/10 p-4 dark:bg-white dark:bg-opacity-80 dark:focus:bg-opacity-100 transition-all dark:outline-none"
                     required
                     maxlength=5000
                 />

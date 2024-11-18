@@ -17,9 +17,13 @@ use components::test::ScrollingComponent;
 use components::skills::Skills;
 use components::experience::Experience;
 use components::contact::Contact;
+use components::footer::Footer;
+use components::theme_switch::ThemeSwitch;
 
 use context::active_section_context::ActiveSectionContextProvider;
+use context::theme_context::ThemeContextProvider;
 use leptos_toaster::Toaster;
+
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -85,21 +89,25 @@ fn HomePage() -> impl IntoView {
 fn AboutPage() -> impl IntoView {
     view! {
         <Title text="About Me"/>
-        <main class="text-gray-950 relative pt-28 sm:pt-36" style="scroll-behavior: smooth;">
-            <div class="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem]" />
-            <div class="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem]"/>
-            <ActiveSectionContextProvider>            
-                <Header/>
-                <div class="flex flex-col items-center px-4">
-                    <Intro/>
-                    <SectionDivisor/>
-                    <About/>
-                    <Projects/>
-                    <Skills />
-                    <Experience />
-                    <Contact />
-                </div>
-            </ActiveSectionContextProvider>
+        <main class="text-gray-950 relative pt-28 sm:pt-36  dark:text-gray-50 dark:text-opacity-90" style="scroll-behavior: smooth;">
+            <div class="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]" />
+            <div class="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"/>
+            <ThemeContextProvider>
+                <ActiveSectionContextProvider>            
+                    <Header/>
+                    <div class="flex flex-col items-center px-4">
+                        <Intro/>
+                        <SectionDivisor/>
+                        <About/>
+                        <Projects/>
+                        <Skills />
+                        <Experience />
+                        <Contact />
+                        <Footer />
+                        <ThemeSwitch />
+                    </div>
+                </ActiveSectionContextProvider>
+            </ThemeContextProvider>
         </main>
     }
 }

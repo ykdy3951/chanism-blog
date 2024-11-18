@@ -18,15 +18,15 @@ fn style_to_string(style: Vec<(String, String)>) -> String {
 }
 
 #[component]
-pub fn VerticalTimelineElement (
+pub fn VerticalTimelineElement(
     children: Children,
     id : String,
     #[prop(default = "".to_string())]
     class: String,
     #[prop(optional)]
-    content_arrow_style : Vec<(String, String)>,
+    content_arrow_style : Option<Box<dyn Fn() -> Vec<(String, String)>>>,
     #[prop(optional)]
-    content_style : Vec<(String, String)>,
+    content_style : Option<Box<dyn Fn() -> Vec<(String, String)>>>,
     #[prop(default = "".to_string())]
     date: String,
     #[prop(default = "".to_string())]
@@ -38,13 +38,13 @@ pub fn VerticalTimelineElement (
     #[prop(optional)]
     icon_on_click: Option<Box<dyn Fn()>>,
     #[prop(optional)]
-    icon_style: Vec<(String, String)>,
+    icon_style: Option<Box<dyn Fn() -> Vec<(String, String)>>>,
     #[prop(optional)]
     on_timeline_element_click: Option<Box<dyn Fn()>>,
     #[prop(default = "".to_string())]
     position: String,
     #[prop(optional)]
-    style: Vec<(String, String)>,
+    style: Option<Box<dyn Fn() -> Vec<(String, String)>>>,
     #[prop(default = "".to_string())]
     text_class : String,
     #[prop(default = true)]
@@ -53,7 +53,8 @@ pub fn VerticalTimelineElement (
     visible : bool,
     #[prop(default = "small".to_string())]
     shadow_size: String,
-) -> impl IntoView {
+) -> impl IntoView 
+{
 
     let (is_visible, set_is_visible) = create_signal(false);
     let (is_visible_once, set_is_visible_once) = create_signal(false);
@@ -112,10 +113,10 @@ pub fn VerticalTimelineElement (
                     // ("vertical-timeline-element--no-children", child_count.get() == 0 as usize)
                     ])
                 }
-            style={style_to_string(style)}
+            style=move || {style_to_string(style.as_ref().map_or(vec![], |f| f()))}
         >
             <span
-                style={style_to_string(icon_style)}
+                style=move || {style_to_string(icon_style.as_ref().map_or(vec![], |f| f()))}
                 class=move || {
                     class_names(&["vertical-timeline-element-icon", icon_class.as_str(), 
                         format!("shadow-size-{}", shadow_size).as_str()
@@ -141,7 +142,7 @@ pub fn VerticalTimelineElement (
                         ("is_hidden", !(is_visible.get() || visible))
                     ])
                 }
-                style={style_to_string(content_style)}
+                style=move || {style_to_string(content_style.as_ref().map_or(vec![], |f| f()))}
                 on:click=move |_: MouseEvent| {
                     if let Some(on_timeline_element_click) = on_timeline_element_click.as_ref() {
                         on_timeline_element_click();
@@ -149,7 +150,7 @@ pub fn VerticalTimelineElement (
                 }
             >
                 <div
-                    style={style_to_string(content_arrow_style)}
+                    style=move || {style_to_string(content_arrow_style.as_ref().map_or(vec![], |f| f()))}
                     class="vertical-timeline-element-content-arrow"  
                 />
                 {
