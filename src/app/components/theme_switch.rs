@@ -12,7 +12,7 @@ pub fn ThemeSwitch() -> impl IntoView {
 
     view! {
         <button
-            class="fixed bottom-5 right-5 bg-white w-[3rem] h-[3rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-gray-950"
+            class="fixed bottom-9 right-9 bg-white w-[3.5rem] h-[3.5rem] bg-opacity-80 backdrop-blur-[0.5rem] border border-white border-opacity-40 shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] active:scale-105 transition-all dark:bg-gray-950"
             on:click=move |_| {
                 match theme.get().theme {
                     ThemeName::Light => theme.set(ThemeState { theme: ThemeName::Dark }),
@@ -23,8 +23,8 @@ pub fn ThemeSwitch() -> impl IntoView {
         {
             move || {
                 match theme.get().theme {
-                    ThemeName::Light => view! { <Icon icon=i::BsSunFill class="text-yellow-500" /> },
-                    ThemeName::Dark => view! { <Icon icon=i::BsMoonStarsFill class="text-yellow-500" /> },
+                    ThemeName::Light => view! { <Icon icon=i::BsSunFill class="text-yellow-500 text-xl" /> },
+                    ThemeName::Dark => view! { <Icon icon=i::BsMoonStarsFill class="text-yellow-500 text-xl" /> },
                 }
             }
         }

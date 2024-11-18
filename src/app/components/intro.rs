@@ -58,12 +58,12 @@ pub fn Intro() -> impl IntoView {
                 <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10 dark:bg-white/10 dark:text-white/60"
                     href="https://www.linkedin.com/in/chanwoong-kim-1632b6283/" target="_blank"
                 >
-                    <Icon icon=i::BsLinkedin class="text-[#0077b5] text-2xl" />
+                    <Icon icon=i::BsLinkedin class="text-[#0077b5] text-2xl dark:text-white" />
                 </a>
                 <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10 dark:bg-white/10 dark:text-white/60"
                     href="https://www.github.com/ykdy3951" target="_blank"
                 >
-                    <Icon icon=i::FaSquareGithubBrands class="text-[#333] text-3xl" />
+                    <Icon icon=i::FaSquareGithubBrands class="text-[#333] text-3xl dark:text-white" />
                 </a>
             </div>
 
