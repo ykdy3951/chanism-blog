@@ -1,5 +1,4 @@
 use leptos::*;
-use web_sys::console;
 use leptos_icons::*;
 use icondata as i;
 use crate::app::lib::hooks::use_section_in_view;
@@ -43,7 +42,8 @@ pub fn Intro() -> impl IntoView {
             <div class="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium animate-text-animation">
                 <a href="#contact" class="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition"
                     on:click=|_| {
-                        console::log_1(&"Contact button clicked".into());
+                        let state = use_context::<RwSignal<SectionState>>().expect("ActiveSectionContextProvider not found");
+                        state.update(|state| state.active_section = SectionName::Contact);
                     }
                 >
                     <span>"Contact Me "</span>

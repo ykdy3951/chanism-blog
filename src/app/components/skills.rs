@@ -1,6 +1,5 @@
 use std::rc::Rc;
 use std::cell::Cell;
-use leptos::logging::log;
 use wasm_bindgen::JsCast;
 
 use leptos::*;
@@ -87,7 +86,6 @@ pub fn Skills() -> impl IntoView {
                     let entry = entry.unchecked_into::<IntersectionObserverEntry>();
 
                     if entry.is_intersecting() && !is_once_triggered.get() {
-                        log!("skills section is intersecting");
                         is_once_triggered.set(true);
                         set_style_name.update(|style_name| *style_name = "fade-in-delay".to_string());
                     }

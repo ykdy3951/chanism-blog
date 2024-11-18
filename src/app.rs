@@ -16,8 +16,10 @@ use components::projects::Projects;
 use components::test::ScrollingComponent;
 use components::skills::Skills;
 use components::experience::Experience;
+use components::contact::Contact;
 
 use context::active_section_context::ActiveSectionContextProvider;
+use leptos_toaster::Toaster;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -41,13 +43,17 @@ pub fn App() -> impl IntoView {
             }
             .into_view()
         }>
-            <main>
-                <Routes>
-                    <Route path="" view=HomePage/>
-                    <Route path="about" view=AboutPage/>
-                    <Route path="test" view=ScrollingComponent/>
-                </Routes>
-            </main>
+            <Toaster
+                position=leptos_toaster::ToasterPosition::TopCenter
+            >
+                <main>
+                    <Routes>
+                        <Route path="" view=HomePage/>
+                        <Route path="about" view=AboutPage/>
+                        <Route path="test" view=ScrollingComponent/>
+                    </Routes>
+                </main>
+            </Toaster>
         </Router>
     }
 }
@@ -79,7 +85,7 @@ fn HomePage() -> impl IntoView {
 fn AboutPage() -> impl IntoView {
     view! {
         <Title text="About Me"/>
-        <main class="text-gray-950 relative pt-28 sm:pt-36 h-[5000px]" style="scroll-behavior: smooth;">
+        <main class="text-gray-950 relative pt-28 sm:pt-36" style="scroll-behavior: smooth;">
             <div class="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem]" />
             <div class="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem]"/>
             <ActiveSectionContextProvider>            
@@ -91,6 +97,7 @@ fn AboutPage() -> impl IntoView {
                     <Projects/>
                     <Skills />
                     <Experience />
+                    <Contact />
                 </div>
             </ActiveSectionContextProvider>
         </main>

@@ -15,3 +15,6 @@ playwright/.cache/
 # Data
 *.png
 *.pdf
+
+# environment file
+.env

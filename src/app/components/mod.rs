@@ -11,3 +11,5 @@ pub mod skills;
 pub mod experience;
 pub mod vertical_timeline;
 pub mod vertical_timeline_element;
+pub mod contact;
+pub mod submit_btn;
