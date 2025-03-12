@@ -43,6 +43,7 @@ jobs:
         run: cargo clippy & cargo fmt
 
 
+      # If using tailwind...
       - name: Download and install tailwindcss binary
         run: npm install -D tailwindcss && npx tailwindcss -i <INPUT/PATH.css> -o <OUTPUT/PATH.css>  # run tailwind
 
