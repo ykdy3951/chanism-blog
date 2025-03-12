@@ -1,13 +1,14 @@
 use leptos::*;
 use wasm_bindgen::JsCast;
 use web_sys::FormData;
-use crate::app::components::submit_btn::SubmitBtn;
-use crate::app::components::section_heading::SectionHeading;
+use crate::app::pages::profile::submit_btn::SubmitBtn;
+use crate::app::pages::profile::section_heading::SectionHeading;
 use crate::app::lib::hooks::use_section_in_view;
 use crate::app::context::active_section_context::{SectionState, SectionName};
 use crate::app::api::email::{send_email, SendEmailRequest};
 use leptos_toaster::*;
 use leptos::logging::log;
+
 #[component]
 pub fn Contact() -> impl IntoView {
 

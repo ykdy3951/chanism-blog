@@ -15,6 +15,10 @@ playwright/.cache/
 # Data
 *.png
 *.pdf
+chanism-blog-*.json
+
+# DS_Store file
+.DS_Store
 
 # environment file
 .env

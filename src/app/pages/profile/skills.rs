@@ -6,7 +6,7 @@ use leptos::*;
 use wasm_bindgen::prelude::Closure;
 use wasm_bindgen::JsValue;
 use web_sys::{js_sys, Document, IntersectionObserver, IntersectionObserverEntry, IntersectionObserverInit};
-use crate::app::components::section_heading::SectionHeading;
+use crate::app::pages::profile::section_heading::SectionHeading;
 use crate::app::lib::hooks::use_section_in_view;
 use crate::app::context::active_section_context::{SectionState, SectionName};
 use crate::app::lib::data::SKILLS_DATA;

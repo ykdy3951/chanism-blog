@@ -7,17 +7,17 @@ use crate::app::context::active_section_context::{SectionState, SectionName};
 #[component]
 pub fn Intro() -> impl IntoView {
 
-    let is_visible = use_section_in_view("home", 0.75, 1000.0);
+    let is_visible = use_section_in_view("intro", 0.75, 1000.0);
 
     create_effect(move |_| {
         if is_visible.get() {
             let state = use_context::<RwSignal<SectionState>>().expect("ActiveSectionContextProvider not found");
-            state.update(|state| state.active_section = SectionName::Home);
+            state.update(|state| state.active_section = SectionName::Intro);
         }
     });
 
     view! {
-        <section class="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]" id="home">
+        <section class="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]" id="intro">
             <div class="flex items-center justify-center">
                 <div class="relative">
                     <div class="animate-image-animation">
@@ -53,7 +53,7 @@ pub fn Intro() -> impl IntoView {
                     href="./chanism_cv.pdf" download=true
                 >
                     <span>"Download CV"</span>
-                    <Icon icon=i::BsDownload class="opacity-60 group-hover:translate-y-1 transition" />
+                    <Icon icon=i::BsDownload class="opacity-60 group-hover:translate-y-1 transition-none" />
                 </a>
                 <a class="flex items-center gap-2 bg-white p-4 rounded-full focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer border-black/10 dark:bg-white/10 dark:text-white/60"
                     href="https://www.linkedin.com/in/chanwoong-kim-1632b6283/" target="_blank"

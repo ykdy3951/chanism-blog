@@ -7,44 +7,83 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-axum = { version = "0.7", optional = true }
-console_error_panic_hook = "0.1"
+axum = { version = "0.7", optional = true}
+console_error_panic_hook = { version = "0.1", optional = true }
 leptos = { version = "0.6", features = ["nightly"] }
 leptos_axum = { version = "0.6", optional = true }
 leptos_meta = { version = "0.6", features = ["nightly"] }
 leptos_router = { version = "0.6", features = ["nightly"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"], optional = true }
 tower = { version = "0.4", optional = true, features = ["util"] }
-tower-http = { version = "0.5", features = ["fs"], optional = true }
-wasm-bindgen = "0.2.95"
+tower-http = { version = "0.5", features = ["fs", "trace"], optional = true }
+sqlx = { version = "0.8.2", features = ["postgres", "runtime-tokio-rustls", "chrono"], optional = true }
+wasm-bindgen = "0.2.99"
 thiserror = "1"
 tracing = { version = "0.1", optional = true }
+tracing-subscriber = { version = "0.3", features = ["fmt"] }
+tracing-wasm = { version = "0.2", optional = true }
 http = "1"
 once_cell = "1.10.0"
 icondata = "0.4.0"
 leptos_icons = "0.3.1"
-# web-sys = "0.3.55"
-web-sys = { version = "0.3.72", features = ["DomRect", "DomRectList", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit", "Document", "HtmlElement", "Window", "Storage", "MediaQueryList"] }
+web-sys = { version = "0.3.72", features = ["DomRect", "DomRectList", "IntersectionObserver", "IntersectionObserverEntry", "IntersectionObserverInit", "Document", "HtmlElement", "Window", "Storage", "MediaQueryList", "File", "FileList"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 dotenv = "0.15.0"
 resend-rs = "0.9.1"
 leptos_toaster = { version = "0.1.7", features = ["builtin_toast"] }
+oauth2 = "4.4.2"
+utoipa-swagger-ui = "8.0.3"
+utoipa = "5.2.0"
+slug = "0.1.6"
+jsonwebtoken = { version = "9", optional = true }
+chrono = "0.4.39"
+uuid = { version = "1.11.0", features = ["v4", "fast-rng", "macro-diagnostics"]}
+reqwest = { version = "0.12.11", optional = false, features = ["multipart"]}
+tokio-util = { version = "0.7.13", optional = true }
+google-cloud-auth = { version = "0.17.2", optional = true }
+google-cloud-storage = { version = "0.23.0", optional = true }
+gloo = { version = "0.11.0", features = ["futures"] }
 
 [features]
-hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate", "leptos_toaster/hydrate"]
+default = ["ssr", "hydrate"]
+hydrate = [
+    "leptos/hydrate", 
+    "leptos_meta/hydrate", 
+    "leptos_router/hydrate", 
+    "leptos_toaster/hydrate",
+    "dep:tracing-wasm",
+    "dep:console_error_panic_hook"
+]
 ssr = [
-    "dep:axum",
-    "dep:tokio",
-    "dep:tower",
-    "dep:tower-http",
-    "dep:leptos_axum",
     "leptos/ssr",
     "leptos_meta/ssr",
     "leptos_router/ssr",
-    "dep:tracing",
+    "tracing",
     "leptos_toaster/ssr",
+    "dep:leptos_axum",
+    "dep:axum",
+    "dep:jsonwebtoken",
+    "dep:tokio",
+    "dep:tower",
+    "dep:tower-http",
+    "dep:sqlx",
+    "dep:google-cloud-auth",
+    "dep:tokio-util",
+    "dep:google-cloud-storage"
 ]
+
+[package.metadata.cargo-all-features]
+denylist = [
+    "axum",
+    "tower",
+    "tower-http",
+    "tokio",
+    "sqlx",
+    "leptos_axum",
+    "jsonwebtoken",
+]
+skip_feature_sets = [["csr", "ssr"], ["csr", "hydrate"], ["ssr", "hydrate"]]
 
 # Defines a size-optimized profile for the WASM bundle in release mode
 [profile.wasm-release]

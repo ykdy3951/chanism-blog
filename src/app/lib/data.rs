@@ -18,7 +18,7 @@ pub static PROJECTS_DATA: &str = r#"
             "title": "Style Shift",
             "description": "Image Style Transfer using Neural Networks",
             "tags": ["Computer Vision", "Neural Networks", "AI"],
-            "image": "https://via.placeholder.com/150"
+            "image": "./style_shift.png"
         }
     ]
     "#;

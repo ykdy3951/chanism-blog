@@ -1,5 +1,5 @@
 use leptos::*;
-use crate::app::components::section_heading::SectionHeading;
+use crate::app::pages::profile::section_heading::SectionHeading;
 use crate::app::lib::hooks::use_section_in_view;
 use crate::app::context::active_section_context::{SectionState, SectionName};
 use crate::app::components::vertical_timeline::VerticalTimeline;

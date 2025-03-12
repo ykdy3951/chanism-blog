@@ -2,7 +2,7 @@ use leptos::*;
 
 #[derive(Default, Clone, Debug)]
 pub enum SectionName {
-    #[default] Home,
+    #[default] Intro,
     About,
     Projects,
     Skills,
@@ -17,7 +17,7 @@ pub struct SectionState {
 
 pub fn section_name_to_string(section_name: SectionName) -> String {
     match section_name {
-        SectionName::Home => "Home".to_string(),
+        SectionName::Intro => "Intro".to_string(),
         SectionName::About => "About".to_string(),
         SectionName::Projects => "Projects".to_string(),
         SectionName::Skills => "Skills".to_string(),

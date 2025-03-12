@@ -38,7 +38,6 @@ pub fn ThemeContextProvider(
 
     create_effect(move |_| {
         let window = web_sys::window().expect("no global `window` exists");
-        log!("aaa");
         if let Some(local_storage) = window.local_storage().unwrap() {
             if let Ok(Some(theme)) = local_storage.get_item("theme") {
                 match theme.as_str() {

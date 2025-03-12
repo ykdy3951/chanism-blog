@@ -1,7 +1,7 @@
 use leptos::*;
 use wasm_bindgen::{prelude::Closure, JsCast};
 use web_sys::window;
-use crate::app::components::projects::ProjectData;
+use crate::app::pages::profile::projects::ProjectData;
 
 #[component]
 pub fn Project(
@@ -14,17 +14,20 @@ pub fn Project(
     let on_scroll = move |_: web_sys::Event| {
         if let Some(window) = window() {
             let document = window.document().unwrap();
-            let target_element : web_sys::Element = document.get_element_by_id(&element_id).unwrap().dyn_into().unwrap();
 
-            let element_top = target_element.get_bounding_client_rect().top();
-            let viewport_height = window.inner_height().unwrap().as_f64().unwrap();
-            let element_height = target_element.scroll_height() as f64;
-            
-            let progress = ((viewport_height - element_top) / (element_height * 1.33)).clamp(0.0, 1.0);
-            let new_scale = 0.8 + 0.2 * progress;
-            let new_opacity = 0.6 + 0.4 * progress;
+            if let Some(target_element) = document.get_element_by_id(&element_id) {
+                let target_element : web_sys::Element = target_element.dyn_into().unwrap();
 
-            set_style.update(|style| *style = format!("transform: scale({}); opacity: {}", new_scale, new_opacity));
+                let element_top = target_element.get_bounding_client_rect().top();
+                let viewport_height = window.inner_height().unwrap().as_f64().unwrap();
+                let element_height = target_element.scroll_height() as f64;
+                
+                let progress = ((viewport_height - element_top) / (element_height * 1.33)).clamp(0.0, 1.0);
+                let new_scale = 0.8 + 0.2 * progress;
+                let new_opacity = 0.6 + 0.4 * progress;
+
+                set_style.update(|style| *style = format!("transform: scale({}); opacity: {}", new_scale, new_opacity));
+            }
         }
     };
 

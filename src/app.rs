@@ -7,24 +7,22 @@ pub mod components;
 pub mod context;
 pub mod api;
 pub mod lib;
+pub mod pages;
 
-use components::header::Header;
-use components::intro::Intro;
-use components::section_divisor::SectionDivisor;
-use components::about::About;
-use components::projects::Projects;
-use components::test::ScrollingComponent;
-use components::skills::Skills;
-use components::experience::Experience;
-use components::contact::Contact;
-use components::footer::Footer;
+use pages::home::Home;
+use pages::post::write::PostWrite;
+use pages::post_list::PostList;
+use pages::post_detail::PostView;
+use pages::profile::index::ProfilePage;
+
 use components::theme_switch::ThemeSwitch;
+use components::header::Header;
+use components::footer::Footer;
 
-use context::active_section_context::ActiveSectionContextProvider;
 use context::theme_context::ThemeContextProvider;
 use leptos_toaster::Toaster;
 
-
+#[tracing::instrument]
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
@@ -34,10 +32,17 @@ pub fn App() -> impl IntoView {
         // injects a stylesheet into the document <head>
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/chanism-blog.css"/>
-
+    
+        <Script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></Script>
+        <Link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet" />
+        <Script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></Script>
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></Script>
+        <Link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/codemirror.min.css" rel="stylesheet" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.4/codemirror.min.js"></Script>
+        <Script src="https://cdn.jsdelivr.net/npm/summernote-codemirror@1.0.0/dist/summernote-codemirror.min.js"></Script>
         // sets the document title
-        <Title text="Welcome to Leptos"/>
-
+        <Title text="Chanism Blog"/>
+        
         // content for this welcome page
         <Router fallback=|| {
             let mut outside_errors = Errors::default();
@@ -51,63 +56,96 @@ pub fn App() -> impl IntoView {
                 position=leptos_toaster::ToasterPosition::TopCenter
             >
                 <main>
-                    <Routes>
-                        <Route path="" view=HomePage/>
-                        <Route path="about" view=AboutPage/>
-                        <Route path="test" view=ScrollingComponent/>
-                    </Routes>
+                    <ThemeContextProvider>
+                        <Routes>
+                            <Route path="" view=HomePage/>
+                            <Route path="profile" view=ProfilePage/>
+                            <Route path="posts" view=PostPage/>
+                            <Route path="posts/:slug" view=PostViewPage/>
+                            <Route path="posts/new" view=PostWritePage />
+                        </Routes>
+                        <ThemeSwitch />
+                    </ThemeContextProvider>
                 </main>
             </Toaster>
         </Router>
     }
 }
 
+#[component]
+fn Layout(children : Children) -> impl IntoView {
+    view! {
+        <main class="min-h-sceen">
+            <Header/>
+            <div class="mt-9">
+                { children() }
+            </div>
+            <Footer/>
+        </main>
+    }
+}
 
 /// Renders the home page of your application.
 #[component]
 fn HomePage() -> impl IntoView {
     // Creates a reactive value to update the button
-    let (count, set_count) = create_signal(0);
-    let on_click = move |_| set_count.update(|count| *count += 1);
-
     view! {
-        <Title text="Leptos + Tailwindcss"/>
-        <main>
-            <div class="bg-gradient-to-tl from-blue-800 to-blue-500 text-white font-mono flex flex-col min-h-screen">
-                <div class="flex flex-row-reverse flex-wrap m-auto">
-                    <button on:click=on_click class="rounded px-3 py-2 m-1 border-b-4 border-l-2 shadow-lg bg-blue-700 border-blue-800 text-white">
-                        "Click number " {count}
-                    </button>
-                </div>
-            </div>
-        </main>
+        <Layout>
+            { 
+                || {
+                    view! {
+                        <Home/>
+                    }
+                }
+            }   
+        </Layout>
     }
 }
 
-/// Renders the about page of your application.
 #[component]
-fn AboutPage() -> impl IntoView {
+fn PostPage() -> impl IntoView {
     view! {
-        <Title text="About Me"/>
-        <main class="text-gray-950 relative pt-28 sm:pt-36  dark:text-gray-50 dark:text-opacity-90" style="scroll-behavior: smooth;">
-            <div class="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]" />
-            <div class="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"/>
-            <ThemeContextProvider>
-                <ActiveSectionContextProvider>            
-                    <Header/>
-                    <div class="flex flex-col items-center px-4">
-                        <Intro/>
-                        <SectionDivisor/>
-                        <About/>
-                        <Projects/>
-                        <Skills />
-                        <Experience />
-                        <Contact />
-                        <Footer />
-                        <ThemeSwitch />
-                    </div>
-                </ActiveSectionContextProvider>
-            </ThemeContextProvider>
-        </main>
+        <Layout>
+            {
+                || {
+                    view! {
+                        <PostList />
+                    }
+                }
+            }
+        </Layout>
+    }
+}
+
+#[component]
+fn PostViewPage() -> impl IntoView {
+    let params = use_params_map();
+    let slug = params.with(|p| p.get("slug").cloned()).unwrap_or_else(|| "Unknown".to_string());
+
+    view! {
+        <Layout>
+            {
+                || {
+                    view! {
+                        <PostView />
+                    }
+                }
+            }
+        </Layout>
+    }
+}
+
+#[component]
+fn PostWritePage() -> impl IntoView {
+    view! {
+        <Layout>
+            {
+                || {
+                    view! {
+                        <PostWrite />
+                    }
+                }
+            }
+        </Layout>
     }
 }

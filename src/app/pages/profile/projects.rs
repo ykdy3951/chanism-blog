@@ -2,8 +2,8 @@ use leptos::*;
 use serde::Deserialize;
 use serde_json;
 use crate::app::lib::data::PROJECTS_DATA;
-use crate::app::components::project::Project;
-use crate::app::components::section_heading::SectionHeading;
+use crate::app::pages::profile::project::Project;
+use crate::app::pages::profile::section_heading::SectionHeading;
 use crate::app::lib::hooks::use_section_in_view;
 use crate::app::context::active_section_context::{SectionState, SectionName};
 
